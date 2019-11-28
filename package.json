@@ -1,0 +1,28 @@
+{
+  "name": "wordplex",
+  "version": "1.0.0",
+  "description": "Generate words by defining consonants and vowels",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/fordnox/wordplex.git"
+  },
+  "keywords": [
+    "word",
+    "generator",
+    "vowel",
+    "consonant"
+  ],
+  "author": "putna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fordnox/wordplex/issues"
+  },
+  "homepage": "https://github.com/fordnox/wordplex#readme",
+  "devDependencies": {
+    "ava": "^2.4.0"
+  }
+}
