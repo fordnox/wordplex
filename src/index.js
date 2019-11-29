@@ -23,7 +23,13 @@ function setSuffix(s) {
 }
 
 function setFormat(format) {
-    _format = format;
+    var new_format = ''
+    format.split("").map(function (a) {
+        if (["C","V","#"].includes(a.toUpperCase())) {
+            new_format += a.toUpperCase()
+        }
+    })
+    _format = new_format;
     return this
 }
 

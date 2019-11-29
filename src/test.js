@@ -73,3 +73,13 @@ test('test generate similar uppercase', t => {
     var result = wordplex.reset().similar('HelL0');
     t.is(wordplex.getFormat(), 'CVCC#');
 });
+
+test('test invalid format', t => {
+    var result = wordplex.reset().generate('now');
+    t.is(wordplex.getFormat(), '');
+});
+
+test('test half valid format', t => {
+    var result = wordplex.reset().generate('nocvcw');
+    t.is(wordplex.getFormat(), 'CVC');
+});
