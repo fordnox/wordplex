@@ -41,6 +41,45 @@ Result
   ...
 ```
 
+
+## Example CLI
+
+```cli
+$ wordplex CVC
+bbb
+bbc
+bbd
+bbf
+bbg
+bbh
+bbj
+bbk
+bbl
+bbm
+...
+```
+
+
+```cli
+$ wordplex look
+```
+
+Will generate words similar to `look` in `CVVC` format
+```
+baab
+baac
+baad
+baaf
+baag
+baah
+baaj
+baak
+baal
+baam
+...
+```
+
+
 ## Generating words
 
 ```js
@@ -187,7 +226,3 @@ Result
   'ak',
   ...
 ```
-  
-## Roadmap
-
-* [ ] cli

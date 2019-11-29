@@ -1,6 +1,6 @@
 {
   "name": "wordplex",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Generate words by defining consonants and vowels format. Ie. generate('VC') => [ 'ab','ac','ad',...]",
   "main": "src/index.js",
   "scripts": {
@@ -20,6 +20,9 @@
   ],
   "author": "putna",
   "license": "MIT",
+  "bin": {
+    "wordplex": "./src/cli.js"
+  },
   "bugs": {
     "url": "https://github.com/fordnox/wordplex/issues"
   },
