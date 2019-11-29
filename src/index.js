@@ -35,13 +35,13 @@ function setFormatByWord(word = null) {
 
     var new_format = ''
     word.split("").map(function (a) {
-        if (numbers.includes(a)) {
+        if (isPositiveInteger(a)) {
             new_format += '#'
         }
-        if (vowels.includes(a)) {
+        if (vowels.includes(a.toLowerCase())) {
             new_format += 'V'
         }
-        if (consonants.includes(a)) {
+        if (consonants.includes(a.toLowerCase())) {
             new_format += 'C'
         }
     })
@@ -100,6 +100,10 @@ function fill_position(pattern, position, length, partial, result) {
         )
     }
     return result
+}
+
+function isPositiveInteger(n) {
+    return n >>> 0 === parseFloat(n);
 }
 
 module.exports = {

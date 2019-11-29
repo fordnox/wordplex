@@ -68,3 +68,8 @@ test('test generate similar words to some word', t => {
     t.is(result[result.length - 1], 'yuuyyu');
     t.is(result.length, 1157625);
 });
+
+test('test generate similar uppercase', t => {
+    var result = wordplex.reset().similar('HelL0');
+    t.is(wordplex.getFormat(), 'CVCC#');
+});
