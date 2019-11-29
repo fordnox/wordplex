@@ -7,42 +7,21 @@
 
 ## Installation
 
+Install for global use
+
+```js
+npm i -g wordplex
+```
+
+Install for use in project
 ```js
 npm i --save wordplex
 ```
 
 
-## Example script
-
-```js
-const wordplex = require('wordplex');
-wordplex.generate('CVC', function(word) {
-    console.log(word)
-});
-
-```
-
-Result
-
-```js
-[ 'bab',
-  'bac',
-  'bad',
-  'baf',
-  'bag',
-  'bah',
-  'baj',
-  'bak',
-  'bal',
-  'bam',
-  'ban',
-  'bap',
-  'baq',
-  ...
-```
-
-
 ## Example CLI
+
+Generate words in format `CVC` (consonant vowel consonant)
 
 ```cli
 $ wordplex CVC
@@ -79,6 +58,34 @@ baam
 ...
 ```
 
+## Example script
+
+```js
+const wordplex = require('wordplex');
+wordplex.generate('CVC', function(word) {
+    console.log(word)
+});
+
+```
+
+Result
+
+```js
+[ 'bab',
+  'bac',
+  'bad',
+  'baf',
+  'bag',
+  'bah',
+  'baj',
+  'bak',
+  'bal',
+  'bam',
+  'ban',
+  'bap',
+  'baq',
+  ...
+```
 
 ## Generating words
 
