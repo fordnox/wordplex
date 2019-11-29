@@ -23,23 +23,26 @@ function setSuffix(s) {
 }
 
 function setFormat(format) {
-    var new_format = ''
+    if (!format) {
+        return this;
+    }
+    let new_format = '';
     format.split("").map(function (a) {
-        if (["C","V","#"].includes(a.toUpperCase())) {
+        if (["C", "V", "#"].includes(a.toUpperCase())) {
             new_format += a.toUpperCase()
         }
-    })
+    });
     _format = new_format;
     return this
 }
 
 function setFormatByWord(word = null) {
     if (word == null) {
-        setFormat('')
+        setFormat('');
         return this
     }
 
-    var new_format = ''
+    let new_format = '';
     word.split("").map(function (a) {
         if (isPositiveInteger(a)) {
             new_format += '#'
@@ -50,8 +53,8 @@ function setFormatByWord(word = null) {
         if (consonants.includes(a.toLowerCase())) {
             new_format += 'C'
         }
-    })
-    setFormat(new_format)
+    });
+    setFormat(new_format);
     return this
 }
 
@@ -59,28 +62,26 @@ function getFormat() {
     return _format;
 }
 
-function similar(word = null) {
-    setFormatByWord(word)
-    if (_format == '') {
-        return []
-    }
-    var pattern = getPattern();
-    return fill_position(pattern, 0, pattern.length, "", []);
+function similar(word = null, cb = null) {
+    setFormatByWord(word);
+    return go(cb)
 }
 
-function generate(format = null) {
-    if (format !== null) {
-        setFormat(format)
-    }
+function generate(format = null, cb = null) {
+    setFormat(format);
+    return go(cb)
+}
+
+function go(cb) {
     if (_format == '') {
         return []
     }
-    var pattern = getPattern();
-    return fill_position(pattern, 0, pattern.length, "", []);
+    let pattern = getPattern();
+    return fill_position(pattern, 0, pattern.length, "", [], cb);
 }
 
 function getPattern() {
-    var pattern = [];
+    let pattern = [];
     _format.split("").map(function (a) {
         if (a.toLowerCase() == 'c') {
             pattern.push(consonants)
@@ -95,14 +96,20 @@ function getPattern() {
     return pattern
 }
 
-function fill_position(pattern, position, length, partial, result) {
+function fill_position(pattern, position, length, partial, result, cb = null) {
     if (position == length - 1) {
-        pattern[position].forEach(character =>
-            result.push(_prefix + partial + character + _suffix)
+        pattern[position].forEach(function (character) {
+                var word = _prefix + partial + character + _suffix;
+                if (typeof cb === "function") {
+                    cb(word)
+                } else {
+                    result.push(word)
+                }
+            }
         )
     } else {
         pattern[position].forEach(character =>
-            fill_position(pattern, position + 1, length, partial + character, result)
+            fill_position(pattern, position + 1, length, partial + character, result, cb)
         )
     }
     return result

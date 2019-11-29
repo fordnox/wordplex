@@ -16,8 +16,10 @@ npm i --save wordplex
 
 ```js
 const wordplex = require('wordplex');
-var words = wordplex.generate('CVC');
-console.log(words)
+wordplex.generate('CVC', function(word) {
+    console.log(word)
+});
+
 ```
 
 Result
@@ -188,5 +190,4 @@ Result
   
 ## Roadmap
 
-* [ ] Yield iterator
 * [ ] cli

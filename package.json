@@ -1,6 +1,6 @@
 {
   "name": "wordplex",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Generate words by defining consonants and vowels format. Ie. generate('VC') => [ 'ab','ac','ad',...]",
   "main": "src/index.js",
   "scripts": {

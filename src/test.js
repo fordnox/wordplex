@@ -34,35 +34,35 @@ test('setSuffix', t => {
 });
 
 test('test default generate', t => {
-    var result = wordplex.reset().generate();
+    let result = wordplex.reset().generate();
     t.is(result[0], 'ab');
     t.is(result[result.length - 1], 'uy');
     t.is(result.length, 105);
 });
 
 test('test generate with format', t => {
-    var result = wordplex.reset().generate('CV');
+    let result = wordplex.reset().generate('CV');
     t.is(result[0], 'ba');
     t.is(result[result.length - 1], 'yu');
     t.is(result.length, 105);
 });
 
 test('test numbers generate', t => {
-    var result = wordplex.reset().generate('#');
+    let result = wordplex.reset().generate('#');
     t.is(result[0], '1');
     t.is(result[result.length - 1], '0');
     t.is(result.length, 10);
 });
 
 test('test Suffix And Prefix', t => {
-    var result = wordplex.reset().setPrefix('hi-').setSuffix('.com').generate('#');
+    let result = wordplex.reset().setPrefix('hi-').setSuffix('.com').generate('#');
     t.is(result[0], 'hi-1.com');
     t.is(result[result.length - 1], 'hi-0.com');
     t.is(result.length, 10);
 });
 
 test('test generate similar words to some word', t => {
-    var result = wordplex.reset().similar('google');
+    let result = wordplex.reset().similar('google');
     t.is(wordplex.getFormat(), 'CVVCCV');
     t.is(result[0], 'baabba');
     t.is(result[result.length - 1], 'yuuyyu');
@@ -70,16 +70,58 @@ test('test generate similar words to some word', t => {
 });
 
 test('test generate similar uppercase', t => {
-    var result = wordplex.reset().similar('HelL0');
+    wordplex.reset().similar('HelL0');
     t.is(wordplex.getFormat(), 'CVCC#');
 });
 
 test('test invalid format', t => {
-    var result = wordplex.reset().generate('now');
+    wordplex.reset().generate('now');
     t.is(wordplex.getFormat(), '');
 });
 
 test('test half valid format', t => {
-    var result = wordplex.reset().generate('nocvcw');
+    wordplex.reset().generate('nocvcw');
     t.is(wordplex.getFormat(), 'CVC');
+});
+
+test('callback generate', t => {
+    let result = [
+        'test-1',
+        'test-2',
+        'test-3',
+        'test-4',
+        'test-5',
+        'test-6',
+        'test-7',
+        'test-8',
+        'test-9',
+        'test-0',
+    ];
+    let i = 0;
+    wordplex.reset().setPrefix('test-').generate('#', function (word) {
+        t.is(word, result[i]);
+        i++;
+    });
+    t.pass();
+});
+
+test('callback similar', t => {
+    let result = [
+        'test-1',
+        'test-2',
+        'test-3',
+        'test-4',
+        'test-5',
+        'test-6',
+        'test-7',
+        'test-8',
+        'test-9',
+        'test-0',
+    ];
+    let i = 0;
+    wordplex.reset().setPrefix('test-').similar('0', function (word) {
+        t.is(word, result[i]);
+        i++;
+    });
+    t.pass();
 });
