@@ -76,12 +76,12 @@ test('test generate similar uppercase', t => {
 
 test('test invalid format', t => {
     wordplex.reset().generate('now');
-    t.is(wordplex.getFormat(), '');
+    t.is(wordplex.getFormat(), 'now');
 });
 
-test('test half valid format', t => {
+test('test every format is valid', t => {
     wordplex.reset().generate('nocvcw');
-    t.is(wordplex.getFormat(), 'CVC');
+    t.is(wordplex.getFormat(), 'nocvcw');
 });
 
 test('callback generate', t => {
@@ -105,6 +105,17 @@ test('callback generate', t => {
     t.pass();
 });
 
+test('callback similar number', t => {
+    let i = 0;
+    wordplex.reset().similar('3', function (word) {
+        if (i < 1) {
+            t.is(word, '1');
+        }
+        i++;
+    });
+    t.pass();
+});
+
 test('callback similar', t => {
     let result = [
         'test-1',
@@ -121,6 +132,40 @@ test('callback similar', t => {
     let i = 0;
     wordplex.reset().setPrefix('test-').similar('0', function (word) {
         t.is(word, result[i]);
+        i++;
+    });
+    t.pass();
+});
+
+test('callback similar case sensitive', t => {
+    let result = [
+        'bibi',
+        'bici',
+        'bidi',
+        'bifi',
+        'bigi',
+        'bihi',
+        'biji',
+        'biki',
+        'bili',
+        'bimi',
+        'bini',
+        'bipi',
+        'biqi',
+        'biri',
+        'bisi',
+        'biti',
+        'bivi',
+        'bixi',
+        'bizi',
+        'biwi',
+        'biyi'
+    ];
+    let i = 0;
+    wordplex.reset().generate('CiCi', function (word) {
+        if (i < result.length) {
+            t.is(word, result[i]);
+        }
         i++;
     });
     t.pass();

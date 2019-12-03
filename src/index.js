@@ -26,13 +26,10 @@ function setFormat(format) {
     if (!format) {
         return this;
     }
-    let new_format = '';
-    format.split("").map(function (a) {
-        if (["C", "V", "#"].includes(a.toUpperCase())) {
-            new_format += a.toUpperCase()
-        }
-    });
-    _format = new_format;
+    if (isPositiveInteger(format)) {
+        format = format.toString()
+    }
+    _format = format
     return this
 }
 
@@ -42,6 +39,9 @@ function setFormatByWord(word = null) {
         return this
     }
 
+    if (isPositiveInteger(word)) {
+        word = word.toString()
+    }
     let new_format = '';
     word.split("").map(function (a) {
         if (isPositiveInteger(a)) {
@@ -82,15 +82,19 @@ function go(cb) {
 
 function getPattern() {
     let pattern = [];
-    _format.split("").map(function (a) {
-        if (a.toLowerCase() == 'c') {
-            pattern.push(consonants)
-        }
-        if (a.toLowerCase() == 'v') {
-            pattern.push(vowels)
-        }
-        if (a == '#') {
-            pattern.push(numbers)
+    _format.split("").map(function (letter) {
+        switch (letter) {
+            case 'C':
+                pattern.push(consonants)
+                break;
+            case 'V':
+                pattern.push(vowels)
+                break;
+            case '#':
+                pattern.push(numbers)
+                break;
+            default:
+                pattern.push([letter])
         }
     });
     return pattern

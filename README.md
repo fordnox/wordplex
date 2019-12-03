@@ -19,7 +19,34 @@ npm i --save wordplex
 ```
 
 
-## Example CLI
+## CLI
+
+```cli
+wordplex --help
+wordplex <pattern> [options]
+
+Generate words according to pattern CVC (generates: bab ...) or word google
+(generates baabba ...)
+
+Options:
+  --help         Show help                                             [boolean]
+  --version      Show version number                                   [boolean]
+  --verbose, -v  Run with verbose logging                              [boolean]
+  --similar, -s  Provide similar word instead of pattern. Will generate similar
+                 words.                                                [boolean]
+  --prefix       Set text to be added to the beggining of all generated texts
+                                                                        [string]
+  --suffix       Set text to be added to the end of all generated texts [string]
+  --pattern                                                     [default: "CVC"]
+```
+
+Generate all 3 letter .com domains in `CVC` format
+
+```wordplex CVC --suffix=.com```
+
+Generate all 4 letter .net domains in `CVCV` format
+
+```wordplex CVCV --suffix=.net```
 
 Generate words in format `CVC` (consonant vowel consonant)
 
@@ -70,7 +97,7 @@ wordplex.generate('CVC', function(word) {
 
 Result
 
-```js
+```cli
 [ 'bab',
   'bac',
   'bad',
@@ -96,7 +123,7 @@ console.log(words)
 
 Result
 
-```js
+```cli
 [ 'ab',
   'ac',
   'ad',
@@ -121,7 +148,7 @@ console.log(words)
 Result generate words in `CVVCCV` format
 
 
-```js
+```cli
 [ 'baabba',
   'baabbe',
   'baabbi',
@@ -146,7 +173,7 @@ console.log(words)
 
 Result
 
-```js
+```cli
 [ 'ab1',
   'ab2',
   'ab3',
@@ -172,7 +199,7 @@ console.log(words)
 
 Result
 
-```js
+```cli
 [ 'my-bab',
   'my-bac',
   'my-bad',
@@ -197,7 +224,7 @@ console.log(words)
 
 Result
 
-```js
+```cli
 [ 'bab.com',
   'bac.com',
   'bad.com',
@@ -222,7 +249,7 @@ console.log(words)
 
 Result
 
-```js
+```cli
 [ 'ab',
   'ac',
   'ad',
