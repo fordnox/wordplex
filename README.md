@@ -1,6 +1,6 @@
 # WordPlex
 
-[![travis build](https://img.shields.io/travis/fordnox/wordplex.svg?style=flat-square)](https://travis-ci.org/fordnox/wordplex)
+[![build status](https://github.com/fordnox/wordplex/workflows/Node.js%20CI/badge.svg)](https://github.com/fordnox/wordplex/actions)
 [![version](https://img.shields.io/npm/v/wordplex.svg?style=flat-square)](https://www.npmjs.com/package/wordplex)
 [![downloads](https://img.shields.io/npm/dm/wordplex.svg?style=flat-square)](https://npm-stat.com/charts.html?package=wordplex&from=2019-11-01)
 [![MIT License](https://img.shields.io/npm/l/wordplex.svg?style=flat-square)](http://opensource.org/licenses/MIT)
