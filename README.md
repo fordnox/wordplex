@@ -14,6 +14,7 @@ npm i -g wordplex
 ```
 
 Install for use in project
+
 ```js
 npm i --save wordplex
 ```
@@ -260,3 +261,8 @@ Result
   'ak',
   ...
 ```
+
+# Development
+
+    npm i --dev
+    npm test
