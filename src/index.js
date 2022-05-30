@@ -1,5 +1,5 @@
-const consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'x', 'z', 'w', 'y'];
-const vowels = ['a', 'e', 'i', 'o', 'u'];
+const consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'x', 'z', 'w'];
+const vowels = ['a', 'e', 'i', 'y', 'o', 'u'];
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 let _format = 'VC';
 let _suffix = '';
