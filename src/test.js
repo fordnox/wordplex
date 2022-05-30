@@ -3,11 +3,11 @@ const test = require('ava');
 const wordplex = require('./index');
 
 test('count Vowels', t => {
-    t.is(wordplex.vowels.length, 5)
+    t.is(wordplex.vowels.length, 6)
 });
 
 test('count Consonants', t => {
-    t.is(wordplex.consonants.length, 21)
+    t.is(wordplex.consonants.length, 20)
 });
 
 test('count Numbers', t => {
@@ -36,15 +36,15 @@ test('setSuffix', t => {
 test('test default generate', t => {
     let result = wordplex.reset().generate();
     t.is(result[0], 'ab');
-    t.is(result[result.length - 1], 'uy');
-    t.is(result.length, 105);
+    t.is(result[result.length - 1], 'uw');
+    t.is(result.length, 120);
 });
 
 test('test generate with format', t => {
     let result = wordplex.reset().generate('CV');
     t.is(result[0], 'ba');
-    t.is(result[result.length - 1], 'yu');
-    t.is(result.length, 105);
+    t.is(result[result.length - 1], 'wu');
+    t.is(result.length, 120);
 });
 
 test('test numbers generate', t => {
@@ -65,8 +65,8 @@ test('test generate similar words to some word', t => {
     let result = wordplex.reset().similar('google');
     t.is(wordplex.getFormat(), 'CVVCCV');
     t.is(result[0], 'baabba');
-    t.is(result[result.length - 1], 'yuuyyu');
-    t.is(result.length, 1157625);
+    t.is(result[result.length - 1], 'wuuwwu');
+    t.is(result.length, 1728000);
 });
 
 test('test generate similar uppercase', t => {
@@ -159,7 +159,7 @@ test('callback similar case sensitive', t => {
         'bixi',
         'bizi',
         'biwi',
-        'biyi'
+        'cibi'
     ];
     let i = 0;
     wordplex.reset().generate('CiCi', function (word) {
