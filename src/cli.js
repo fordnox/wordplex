@@ -1,59 +1,71 @@
 #!/usr/bin/env node
+const { parseArgs } = require('node:util');
 const wordplex = require('./index');
-const yargs = require('yargs');
-const { hideBin } = require('yargs/helpers');
 
-yargs(hideBin(process.argv))
-    .command({
-        command: '$0 <pattern> [options]',
-        desc: 'Generate words according to pattern CVC (generates: bab ...) or word google (generates baabba ...)',
-        builder: (yargs) => yargs.default('pattern', 'CVC'),
-        handler: (argv) => {
-            if (argv.verbose) console.info(`generate words using format: ${argv.format}`)
-            if (argv.prefix) {
-                if (argv.verbose) console.info(`setting prefix to: ${argv.prefix}`)
-                wordplex.setPrefix(argv.prefix)
-            }
+const usage = `Usage: wordplex <pattern> [--option]
 
-            if (argv.suffix) {
-                if (argv.verbose) console.info(`setting suffix to: ${argv.prefix}`)
-                wordplex.setSuffix(argv.suffix)
-            }
+Generate words according to pattern CVC (generates: bab ...) or word google (generates baabba ...)
 
-            if (argv.similar) {
-                wordplex.similar(argv.pattern, function (word) {
-                    console.log(word)
-                })
-            } else {
-                wordplex.generate(argv.pattern, function (word) {
-                    console.log(word)
-                })
-            }
+Options:
+      --help     Show help
+      --version  Show version number
+  -v, --verbose  Run with verbose logging
+  -s, --similar  Provide similar word instead of pattern. Will generate similar words.
+      --prefix   Set text to be added to the beggining of all generated texts
+      --suffix   Set text to be added to the end of all generated texts`;
+
+let values, positionals;
+try {
+    ({ values, positionals } = parseArgs({
+        options: {
+            help: { type: 'boolean' },
+            version: { type: 'boolean' },
+            verbose: { type: 'boolean', short: 'v' },
+            similar: { type: 'boolean', short: 's' },
+            prefix: { type: 'string' },
+            suffix: { type: 'string' },
         },
-    })
+        allowPositionals: true,
+    }));
+} catch (err) {
+    console.error(err.message)
+    console.error(usage)
+    process.exit(1)
+}
 
-    .option('verbose', {
-        alias: 'v',
-        type: 'boolean',
-        description: 'Run with verbose logging'
-    })
+if (values.help) {
+    console.log(usage)
+    process.exit(0)
+}
 
-    .option('similar', {
-        alias: 's',
-        type: 'boolean',
-        description: 'Provide similar word instead of pattern. Will generate similar words.'
-    })
+if (values.version) {
+    console.log(require('../package.json').version)
+    process.exit(0)
+}
 
-    .option('prefix', {
-        type: 'string',
-        description: 'Set text to be added to the beggining of all generated texts'
-    })
+const pattern = positionals[0]
+if (!pattern) {
+    console.error(usage)
+    process.exit(1)
+}
 
-    .option('suffix', {
-        type: 'string',
-        description: 'Set text to be added to the end of all generated texts'
-    })
+if (values.verbose) console.info(`generate words using format: ${pattern}`)
+if (values.prefix) {
+    if (values.verbose) console.info(`setting prefix to: ${values.prefix}`)
+    wordplex.setPrefix(values.prefix)
+}
 
-    .usage('Usage: $0 <pattern> [--option]')
-    //.wrap(100)
-    .parse()
+if (values.suffix) {
+    if (values.verbose) console.info(`setting suffix to: ${values.suffix}`)
+    wordplex.setSuffix(values.suffix)
+}
+
+if (values.similar) {
+    wordplex.similar(pattern, function (word) {
+        console.log(word)
+    })
+} else {
+    wordplex.generate(pattern, function (word) {
+        console.log(word)
+    })
+}
