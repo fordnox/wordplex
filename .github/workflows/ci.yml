@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+      - name: Syntax check
+        run: node --check src/cli.js
+      - name: Smoke test --help
+        run: node src/cli.js --help
+      - name: Smoke test --version
+        run: node src/cli.js --version
+      - name: Smoke test generate
+        run: node src/cli.js CV
+      - name: Pack
+        run: npm pack --dry-run
