@@ -7,6 +7,12 @@
 
 ## Installation
 
+Run without installing
+
+```sh
+npx wordplex CVC
+```
+
 Install for global use
 
 ```js
