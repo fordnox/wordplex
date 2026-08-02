@@ -1,6 +1,6 @@
 # WordPlex
 
-[![build status](https://github.com/fordnox/wordplex/workflows/Node.js%20CI/badge.svg)](https://github.com/fordnox/wordplex/actions)
+[![build status](https://github.com/fordnox/wordplex/actions/workflows/ci.yml/badge.svg)](https://github.com/fordnox/wordplex/actions/workflows/ci.yml)
 [![version](https://img.shields.io/npm/v/wordplex.svg?style=flat-square)](https://www.npmjs.com/package/wordplex)
 [![downloads](https://img.shields.io/npm/dm/wordplex.svg?style=flat-square)](https://npm-stat.com/charts.html?package=wordplex&from=2019-11-01)
 [![MIT License](https://img.shields.io/npm/l/wordplex.svg?style=flat-square)](http://opensource.org/licenses/MIT)
@@ -24,21 +24,17 @@ npm i --save wordplex
 
 ```cli
 wordplex --help
-wordplex <pattern> [options]
+Usage: wordplex <pattern> [--option]
 
-Generate words according to pattern CVC (generates: bab ...) or word google
-(generates baabba ...)
+Generate words according to pattern CVC (generates: bab ...) or word google (generates baabba ...)
 
 Options:
-  --help         Show help                                             [boolean]
-  --version      Show version number                                   [boolean]
-  --verbose, -v  Run with verbose logging                              [boolean]
-  --similar, -s  Provide similar word instead of pattern. Will generate similar
-                 words.                                                [boolean]
-  --prefix       Set text to be added to the beggining of all generated texts
-                                                                        [string]
-  --suffix       Set text to be added to the end of all generated texts [string]
-  --pattern                                                     [default: "CVC"]
+      --help     Show help
+      --version  Show version number
+  -v, --verbose  Run with verbose logging
+  -s, --similar  Provide similar word instead of pattern. Will generate similar words.
+      --prefix   Set text to be added to the beggining of all generated texts
+      --suffix   Set text to be added to the end of all generated texts
 ```
 
 Generate all 3 letter .com domains in `CVC` format
@@ -53,22 +49,22 @@ Generate words in format `CVC` (consonant vowel consonant)
 
 ```cli
 $ wordplex CVC
-bbb
-bbc
-bbd
-bbf
-bbg
-bbh
-bbj
-bbk
-bbl
-bbm
+bab
+bac
+bad
+baf
+bag
+bah
+baj
+bak
+bal
+bam
 ...
 ```
 
 
 ```cli
-$ wordplex look
+$ wordplex look --similar
 ```
 
 Will generate words similar to `look` in `CVVC` format
@@ -264,6 +260,6 @@ Result
 
 # Development
 
-    npm i --dev
+    npm install
     npm test
 
