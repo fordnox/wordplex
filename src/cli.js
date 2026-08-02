@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 const wordplex = require('./index');
-require('yargs') // eslint-disable-line
+const yargs = require('yargs');
+const { hideBin } = require('yargs/helpers');
+
+yargs(hideBin(process.argv))
     .command({
         command: '$0 <pattern> [options]',
         desc: 'Generate words according to pattern CVC (generates: bab ...) or word google (generates baabba ...)',
@@ -53,4 +56,4 @@ require('yargs') // eslint-disable-line
 
     .usage('Usage: $0 <pattern> [--option]')
     //.wrap(100)
-    .argv
+    .parse()

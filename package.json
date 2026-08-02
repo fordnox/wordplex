@@ -19,6 +19,9 @@
     "language"
   ],
   "author": "putna",
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=23"
+  },
   "license": "MIT",
   "bin": {
     "wordplex": "./src/cli.js"

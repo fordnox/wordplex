@@ -1,6 +1,6 @@
-const test = require('ava');
+import test from 'ava';
 
-const wordplex = require('./index');
+import wordplex from './index.js';
 
 test('count Vowels', t => {
     t.is(wordplex.vowels.length, 6)
