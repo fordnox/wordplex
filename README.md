@@ -43,6 +43,51 @@ Options:
       --suffix   Set text to be added to the end of all generated texts
 ```
 
+## Pattern characters
+
+Every uppercase pattern character represents one character from a group.
+Lowercase letters and digits are used literally at their position.
+
+| Character | Generates |
+|-----------|-----------|
+| `C` | Consonant (`bcdfghjklmnpqrstvxzw`) |
+| `V` | Vowel (`aeiyou`) |
+| `L` | Any letter |
+| `N` or `#` | Number (`0-9`) |
+| `P` | ChiP — Chinese premium letter (any letter except vowels and `v`) |
+| `W` | Western premium letter (any letter except `j k q u v w x y z`) |
+| `-` | Hyphen |
+| `*` | Anything (letter, number or hyphen) |
+| `A` `B` `H` `K` | Letter repetition |
+| `D` `E` `F` `G` | Number repetition |
+| `M` `O` | Vowel repetition |
+| `U` `X` | Consonant repetition |
+| `^` | Ignored (filter-mode marker, kept for pattern compatibility) |
+
+Repetition characters make patterns with repeating characters: within one word
+the same letter always repeats the same value, and different letters of the
+same group always hold different values.
+
+```cli
+$ wordplex DED
+121
+131
+141
+...
+$ wordplex DDEE
+1122
+1133
+...
+$ wordplex MUMUM
+ababa
+acaca
+...
+$ wordplex woAABB
+woaabb
+woaacc
+...
+```
+
 Generate all 3 letter .com domains in `CVC` format
 
 ```wordplex CVC --suffix=.com```

@@ -137,6 +137,100 @@ test('callback similar', t => {
     t.pass();
 });
 
+test('L generates any letter', t => {
+    let result = wordplex.reset().generate('L');
+    t.is(result.length, 26);
+    t.is(result[0], 'a');
+    t.is(result[result.length - 1], 'z');
+});
+
+test('N generates numbers like #', t => {
+    t.deepEqual(wordplex.reset().generate('N'), wordplex.reset().generate('#'));
+});
+
+test('P generates chip letters', t => {
+    let result = wordplex.reset().generate('P');
+    t.is(result.length, 20);
+    t.false(result.includes('a'));
+    t.false(result.includes('e'));
+    t.false(result.includes('i'));
+    t.false(result.includes('o'));
+    t.false(result.includes('u'));
+    t.false(result.includes('v'));
+    t.true(result.includes('y'));
+});
+
+test('W generates western letters', t => {
+    let result = wordplex.reset().generate('W');
+    t.is(result.length, 17);
+    t.false(result.includes('j'));
+    t.false(result.includes('z'));
+    t.true(result.includes('a'));
+});
+
+test('* generates letters numbers and hyphen', t => {
+    let result = wordplex.reset().generate('*');
+    t.is(result.length, 37);
+    t.true(result.includes('a'));
+    t.true(result.includes('0'));
+    t.true(result.includes('-'));
+});
+
+test('hyphen is literal', t => {
+    let result = wordplex.reset().generate('C-V');
+    t.is(result[0], 'b-a');
+    t.is(result.length, 120);
+});
+
+test('^ is ignored', t => {
+    t.deepEqual(wordplex.reset().generate('^CV'), wordplex.reset().generate('CV'));
+});
+
+test('number repetition same letter repeats', t => {
+    let result = wordplex.reset().generate('DD');
+    t.is(result.length, 10);
+    t.deepEqual(result, ['11', '22', '33', '44', '55', '66', '77', '88', '99', '00']);
+});
+
+test('number repetition different letters differ', t => {
+    let result = wordplex.reset().generate('DE');
+    t.is(result.length, 90);
+    t.true(result.every(word => word[0] !== word[1]));
+});
+
+test('number repetition DED', t => {
+    let result = wordplex.reset().generate('DED');
+    t.is(result.length, 90);
+    t.is(result[0], '121');
+    t.true(result.every(word => word[0] === word[2] && word[0] !== word[1]));
+});
+
+test('number repetition does not constrain N', t => {
+    let result = wordplex.reset().generate('DN');
+    t.is(result.length, 100);
+    t.true(result.includes('11'));
+});
+
+test('letter repetition', t => {
+    let result = wordplex.reset().generate('AB');
+    t.is(result.length, 26 * 25);
+    t.true(result.every(word => word[0] !== word[1]));
+});
+
+test('vowel and consonant repetition', t => {
+    let result = wordplex.reset().generate('MUM');
+    t.is(result.length, 120);
+    t.is(result[0], 'aba');
+    t.true(result.every(word => word[0] === word[2]));
+});
+
+test('repetition mixed with literals', t => {
+    let result = wordplex.reset().generate('woAA');
+    t.is(result.length, 26);
+    t.is(result[0], 'woaa');
+    t.true(result.every(word => word.startsWith('wo') && word[2] === word[3]));
+});
+
 test('callback similar case sensitive', t => {
     let result = [
         'bibi',

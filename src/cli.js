@@ -12,7 +12,18 @@ Options:
   -v, --verbose  Run with verbose logging
   -s, --similar  Provide similar word instead of pattern. Will generate similar words.
       --prefix   Set text to be added to the beggining of all generated texts
-      --suffix   Set text to be added to the end of all generated texts`;
+      --suffix   Set text to be added to the end of all generated texts
+
+Pattern characters:
+  C  consonant                     V  vowel
+  L  any letter                    N or #  number
+  P  chip letter (no vowels, v)    W  western letter (no j k q u v w x y z)
+  *  letter, number or hyphen      -  hyphen
+  A B H K  letter repetition       D E F G  number repetition
+  M O  vowel repetition            U X  consonant repetition
+  Lowercase letters and digits are used literally.
+  Repetition: the same letter repeats one value in a word, different
+  letters of the same group always hold different values (DED -> 121, 131 ...)`;
 
 let values, positionals;
 try {
