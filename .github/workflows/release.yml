@@ -35,7 +35,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           npm version ${{ inputs.version }} -m "Release v%s"
       - name: Push commit and tag
-        run: git push origin master --follow-tags
+        run: git push origin main --follow-tags
       - name: Create GitHub release
         run: gh release create "v$(node -p "require('./package.json').version")" --generate-notes
         env:
